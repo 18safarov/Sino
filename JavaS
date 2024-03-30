@@ -1,0 +1,39 @@
+const sliderImages = document.querySelectorAll('.slider img');
+const infoDiv = document.getElementById('info');
+
+let index = 0;
+
+function showImage(index) {
+    sliderImages.forEach(image => {
+        image.style.display = 'none';
+    });
+    sliderImages[index].style.display = 'block';
+}
+
+function displayInfo(index) {
+    const movieInfo = [
+        { title: "Название фильма 1", description: "Описание фильма 1", rating: "9.0", recommended: true },
+        { title: "Название фильма 2", description: "Описание фильма 2", rating: "8.5", recommended: false },
+        { title: "Название фильма 3", description: "Описание фильма 3", rating: "9.5", recommended: true },
+        // Добавьте информацию о каждом фильме
+    ];
+
+    const movie = movieInfo[index];
+    let infoHTML = `<h2>${movie.title}</h2>`;
+    infoHTML += `<p>${movie.description}</p>`;
+    infoHTML += `<p>Рейтинг: ${movie.rating}</p>`;
+    infoHTML += `<p>${movie.recommended ? 'Рекомендуется к просмотру' : 'Не рекомендуется к просмотру'}</p>`;
+
+    infoDiv.innerHTML = infoHTML;
+}
+
+showImage(index);
+displayInfo(index);
+
+setInterval(() => {
+    index = (index + 1) % sliderImages.length;
+    showImage(index);
+    displayInfo(index);
+}, 5000);
+
+infoDiv.innerHTML += "<p>Сайт создан Sino</p>";
